@@ -1,6 +1,4 @@
-# Adonis API application
-
-This is the boilerplate for creating an API server in AdonisJs, it comes pre-configured with.
+# APPArty - api
 
 1. Bodyparser
 2. Authentication
@@ -10,19 +8,25 @@ This is the boilerplate for creating an API server in AdonisJs, it comes pre-con
 
 ## Setup
 
-Use the adonis command to install the blueprint
-
-```bash
-adonis new yardstick --api-only
+instale as dependências com:
+```js
+npm install
 ```
+configure o .env de acordo com suas credenciais de banco de dados
 
-or manually clone the repo and then run `npm install`.
+Obs.: A aplicação utiliza MYSQL
 
 
 ### Migrations
 
-Run the following command to run startup migrations.
+Execute o seguinte comando para executar migrações de inicialização.
 
 ```js
 adonis migration:run
+```
+
+### Inicie o servidor web do adonis
+
+```js
+adonis serve --dev
 ```
