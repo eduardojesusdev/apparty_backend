@@ -19,7 +19,6 @@
 const Route = use('Route')
 const Env = use('Env')
 
-
 Route.group(() => {
   Route.get('/', () => {
     return {
@@ -30,10 +29,12 @@ Route.group(() => {
 
   Route.post('/signup', 'SignUpController.store')
   Route.post('/login', 'LoginController.login')
-
+  Route.post('/forgot-password', 'forgotController.forgot')
 })
 
-// Route.group(() => {
-
-// }).middleware(['sessionCheck']).prefix('painel')
+Route.group(() => {
+  Route.post('/signup', 'SignUpController.ownerStore')
+  Route.post('/login', 'LoginController.ownerLogin')
+  Route.post('/forgot-password', 'forgotController.ownerForgot')
+}).prefix('owner')
 

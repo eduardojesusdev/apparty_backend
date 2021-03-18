@@ -9,7 +9,7 @@ class UserController {
     }
 
     const processes = await Database.collection('processes').where({codigoProc: {$in: result}}).find()
-    return view.render('admin.list-favorites', {processes: processes})
+    return {processes: processes}
 
   }
 
