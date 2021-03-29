@@ -19,6 +19,7 @@
 const Route = use('Route')
 const Env = use('Env')
 
+//start guest
 Route.group(() => {
   Route.get('/', () => {
     return {
@@ -37,4 +38,30 @@ Route.group(() => {
   Route.post('/login', 'LoginController.ownerLogin')
   Route.post('/forgot-password', 'forgotController.ownerForgot')
 }).prefix('owner')
+//end guest
 
+
+//start user
+Route.group(() => {
+  Route.get('/', 'PartyController.all')
+  Route.post('/{slug}', 'PartyController.single')
+  Route.post('/{slug}/presence/{user_id}', 'UserController.changePresence')
+}).middleware(['auth'])
+
+Route.group(() => {
+  Route.get('/', 'PartyController.all')
+  Route.post('/{slug}', 'PartyController.single')
+  Route.post('/{slug}/presence/{user_id}', 'UserController.changePresence')
+}).prefix('profile').middleware(['auth'])
+//end user
+
+
+
+//start owner
+Route.group(() => {
+  Route.post('/', 'PartyOwnerController.all')
+  Route.post('/{slug}', 'PartyOwnerController.single')
+  Route.post('/edit/{slug}', 'PartyController.edit')
+  Route.post('/delete/{slug}', 'PartyController.delete')
+}).prefix('dashboard').middleware(['ownerAuth'])
+//end owner

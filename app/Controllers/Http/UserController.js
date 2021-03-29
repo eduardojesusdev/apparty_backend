@@ -13,7 +13,7 @@ class UserController {
 
   }
 
-  async changeFavStat({request, auth}){
+  async changePresence({request, auth}){
     const user = await User.find(auth.user._id)
     var thisFav = request.body.codigoProc
     var added = ''

@@ -14,7 +14,7 @@ class UserSchema extends Schema {
       table.string('bio', 255)
       table.date('birthdate').notNullable()
 
-      table.json('favorites')
+      table.json('presences')
       table.timestamps()
     })
   }
