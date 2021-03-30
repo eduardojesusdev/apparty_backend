@@ -8,9 +8,21 @@ class LoginController {
       return token
     } catch (error) {
       console.log(error)
-      return response.status(500).send({erro: error})
+      response.status(500).send({erro: error})
     }
   }
+  async loginOwner ({request, response, auth}){
+    try {
+      const {email, password} = request.all()
+      const token = await auth.authenticator('jwtOwner').attempt(email, password)
+      response.send(token)
+    } catch (error) {
+      console.log(error)
+      response.status(500).send({erro: error})
+    }
+  }
+
+
 }
 
 module.exports = LoginController

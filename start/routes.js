@@ -34,34 +34,49 @@ Route.group(() => {
 })
 
 Route.group(() => {
+  Route.get('/', () => {
+    return {
+      api_version: Env.get('API_VERSION'),
+      application_name: Env.get('APP_NAME_OWNER')
+    }
+  })
   Route.post('/signup', 'SignUpController.ownerStore')
-  Route.post('/login', 'LoginController.ownerLogin')
-  Route.post('/forgot-password', 'forgotController.ownerForgot')
-}).prefix('owner')
+  Route.post('/login', 'LoginController.loginOwner')
+  Route.post('/forgot-password', 'forgotController.forgotOwner')
+}).prefix('owner-guest')
 //end guest
+
 
 
 //start user
 Route.group(() => {
-  Route.get('/', 'PartyController.all')
+  Route.get('/', 'PartyController.show')
   Route.post('/{slug}', 'PartyController.single')
-  Route.post('/{slug}/presence/{user_id}', 'UserController.changePresence')
-}).middleware(['auth'])
+  Route.post('/{slug}/presence', 'PartyController.changePresence')
+}).prefix('dashboard').middleware(['auth'])
 
 Route.group(() => {
-  Route.get('/', 'PartyController.all')
-  Route.post('/{slug}', 'PartyController.single')
-  Route.post('/{slug}/presence/{user_id}', 'UserController.changePresence')
-}).prefix('profile').middleware(['auth'])
+  Route.get('/', 'UserController.show')
+  Route.post('/edit', 'UserController.edit')
+  Route.post('/delete', 'UserController.delete')
+}).prefix('dashboard/profile').middleware(['auth'])
 //end user
 
 
 
 //start owner
 Route.group(() => {
-  Route.post('/', 'PartyOwnerController.all')
-  Route.post('/{slug}', 'PartyOwnerController.single')
-  Route.post('/edit/{slug}', 'PartyController.edit')
-  Route.post('/delete/{slug}', 'PartyController.delete')
-}).prefix('dashboard').middleware(['ownerAuth'])
+  Route.get('/', 'PartyOwnerController.all')
+  Route.post('/party/{party_slug}', 'PartyOwnerController.single')
+  Route.post('/edit/{party_slug}', 'PartyOwnerController.edit')
+  Route.post('/delete/{party_slug}', 'PartyOwnerController.delete')
+}).prefix('owner').middleware(['ownerAuth'])
+
+Route.group(() => {
+  Route.get('/', 'OwnerController.show')
+  Route.post('/edit', 'OwnerController.edit')
+  Route.post('/delete', 'OwnerController.delete')
+
+}).prefix('owner/profile')
+
 //end owner

@@ -45,7 +45,7 @@ class SignUpController {
       user.email = data.email
       user.password = data.password
       user.birthdate = data.birthdate
-      user.favorites = null;
+      user.presences = null;
       if(await user.save()){
         return response.status(200).send({message: "Usuário criado com sucesso!"})
       }
@@ -60,7 +60,7 @@ class SignUpController {
     const data = request.body
     const rules = {
       name: "required | min:3",
-      email: "required | email | unique:users",
+      email: "required | email | unique:owners",
       birthdate: "required | date",
       password: "required|min:5|confirmed",
       password_confirmation: "required"
@@ -81,6 +81,7 @@ class SignUpController {
     const validation = await validate(data, rules, messages)
     if(validation.fails()) {
       const messages = validation.messages()
+      console.log(messages)
       return response.status(400).send({message: messages})
     }
 

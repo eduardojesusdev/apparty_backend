@@ -1,7 +1,7 @@
 'use strict'
 
 class UserController {
-  async favorites({view, auth}){
+  async favorites({auth}){
     let favs = auth.user.favorites
     var result = [];
     for(var i in favs){
