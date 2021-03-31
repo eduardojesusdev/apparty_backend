@@ -52,7 +52,7 @@ Route.group(() => {
 Route.group(() => {
   Route.get('/', 'PartyController.show')
   Route.post('/{slug}', 'PartyController.single')
-  Route.post('/{slug}/presence', 'PartyController.changePresence')
+  Route.post('/{slug}/presence', 'PartyController.triggerPresence')
 }).prefix('dashboard').middleware(['auth'])
 
 Route.group(() => {
@@ -76,7 +76,6 @@ Route.group(() => {
   Route.get('/', 'OwnerController.show')
   Route.post('/edit', 'OwnerController.edit')
   Route.post('/delete', 'OwnerController.delete')
-
 }).prefix('owner/profile')
 
 //end owner

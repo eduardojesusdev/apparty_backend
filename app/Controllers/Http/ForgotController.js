@@ -1,6 +1,8 @@
 'use strict'
 const { validate, validateAll } = use('Validator')
 const User = use('App/Models/User')
+const Owner = use('App/Models/Owner')
+
 const PasswordReset = use('App/Models/PasswordReset')
 const randomString = require('random-string')
 const Mail = use('Mail')
@@ -11,15 +13,13 @@ class ForgotController {
 
   async forgot({request, response, session}){
 
-
+    return request.only('email')
     const validation = await validate(request.only('email'), {
       email: 'required|email'
     })
 
     if (validation.fails()) {
-      session.withErrors(validation.messages()).flashAll()
-
-      return response.redirect('back')
+      response.status(400).send(session.withErrors(validation.messages()).flashAll())
     }
 
     try {
@@ -130,8 +130,60 @@ class ForgotController {
     }
   }
 
-  async forgotOwner({request, response}){
-    response.send('http://exemplo.com?asd518sa48d1sa851d15sad181')
+  async forgotOwner({request, response, session}){
+
+
+    const validation = await validate(request.only('email'), {
+      email: 'required|email'
+    })
+
+    if (validation.fails()) {
+      session.withErrors(validation.messages()).flashAll()
+
+      return response.redirect('back')
+    }
+
+    try {
+      // get user
+      const user = await User.findBy('email', request.input('email'))
+
+      await PasswordReset.query().where('email', user.email).delete()
+
+      const { token } = await PasswordReset.create({
+        email: user.email,
+        token: randomString({ length: 40 })
+      })
+
+      const mailData = {
+        user: user.toJSON(),
+        token
+      }
+
+      await Mail.send('auth.emails.password_reset', mailData, message => {
+        message
+          .to(user.email)
+          .from('hello@adonisjs.com')
+          .subject('Password reset link')
+      })
+
+      session.flash({
+        notification: {
+          type: 'success',
+          message: 'A password reset link has been sent to your email address.'
+        }
+      })
+
+      return response.redirect('back')
+    } catch (error) {
+      session.flash({
+        notification: {
+          type: 'danger',
+          message: 'Sorry, there is no user with this email address.'
+        }
+      })
+
+      return response.redirect('back')
+    }
   }
 
   async resetOwner ({ request, session, response }) {

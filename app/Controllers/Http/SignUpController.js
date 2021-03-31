@@ -99,6 +99,7 @@ class SignUpController {
       return error
     }
   }
+
 }
 
 module.exports = SignUpController
