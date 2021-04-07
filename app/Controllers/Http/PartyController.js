@@ -37,6 +37,7 @@ class PartyController {
             if (key.substr(0, l) == keyToDelete)
                 delete obj[key];
     }
+
     deleteFromObject(user_id, party.presences)
     removed = true
     }else{
