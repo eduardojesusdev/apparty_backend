@@ -1,7 +1,6 @@
 'use strict'
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
-/** @typedef {import('@adonisjs/framework/src/View')} View */
 
 class OwnerAuth {
   /**
@@ -9,13 +8,12 @@ class OwnerAuth {
    * @param {Request} ctx.request
    * @param {Function} next
    */
-  async handle ({ request, response }, next) {
-
+  async handle ({ auth, request, response }, next) {
     try {
-      const isOwner = request.params.token
-      await next()
+      console.log('aaaaaaaaaa')
+      await auth.check()
     } catch (error) {
-      response.send('api token inválido')
+      response.status(400).send(error.message)
     }
   }
 }

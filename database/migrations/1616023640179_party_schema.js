@@ -26,7 +26,7 @@ class PartySchema extends Schema {
       table.string('theme')
       table.json('presences')
       table.string('tutorial_video_link')
-      table.json('atractions')
+      table.string('atractions')
       table.date('date_init')
       table.date('date_close')
       table.bool('is_closed')
