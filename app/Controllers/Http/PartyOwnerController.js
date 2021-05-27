@@ -8,23 +8,24 @@ const { validate } = use('Validator')
 class PartyOwnerController {
 
   async all({response}){
-    console.log('aaaaaaaaa')
-    const badaladas = await Party.where('presences', presences).fetch()
-    const acontecendo_agora = await Party.where('date_init', '<=', Date.now()).fetch()
-    const proximas_horas = await Party.where('date_init', '>=', Date.now() + 8).fetch()
-    const tematicas = await Party.where('is_tematic', '!=', null).fetch()
+    try {
+      const parties = await Party.all()
+      response
+      .status(200)
+      .send({
+        parties
+      })
+    } catch (error) {
+      response
+      .status(400)
+      .send({
+        message: error.message
+      })
+    }
 
-    response.status(200).send({
-      badaladas,
-      acontecendo_agora,
-      proximas_horas,
-      tematicas
-    })
   }
 
   async add({request, response, auth}){
-
-    console.log(auth.user.id)
 
     const data = request.body
     const rules = {
@@ -73,8 +74,11 @@ class PartyOwnerController {
     const validation = await validate(data, rules, messages)
     if(validation.fails()) {
       const messages = validation.messages()
-      console.log(messages)
-      return response.status(400).send({message: messages})
+      response
+      .status(400)
+      .send({
+        message: messages
+      })
     }
 
     try {
@@ -82,7 +86,7 @@ class PartyOwnerController {
 
       party.name = data.name
       party.description = data.description
-      party.owner_id = auth.user._id
+      party.owner_id = auth.user.id
       party.party_slug = data.party_slug
       party.type_event = data.type_event
       party.address = data.address
@@ -95,27 +99,48 @@ class PartyOwnerController {
       party.ticket_link = data.ticket_link
       party.banner_link = data.banner_link
       party.atractions = data.atractions
+      party.tutorial_video_link = data.tutorial_video_link
+      party.point_of_reference = data.point_of_reference
+      party.presences = data.presences
+      party.theme = data.theme
       party.date_init = data.date_init
       party.date_close = data.date_close
 
       if(await party.save()){
-        return response.status(200).send({message: "Festa criada com sucesso!"})
+        return response
+        .status(200)
+        .send(
+          {
+            message: "Festa criada com sucesso!",
+            slug: party.party_slug
+          }
+        )
       }
     } catch (error) {
-      console.log(error)
-      return error
+      response
+      .status(400)
+      .send({
+        message: error.message
+      })
     }
   }
 
   async single({request, response}){
-    const slug = request.body.slug
-    const single = await Party.where('party_slug', slug).first()
+    const slug = request.params.party_slug
+    try {
+      const single = await Party.findByOrFail('party_slug', slug)
+      response.status(200).send(single)
+    } catch (error) {
+      response
+      .status(400)
+      .send({
+        message: error.message
+      })
+    }
 
-    response.status(200).send(single)
   }
 
   async generateSlug({request, response}){
-    return 'works'
 
     let party_slug = request.body.party_slug
 
@@ -123,15 +148,17 @@ class PartyOwnerController {
       party_slug: "required | unique:parties"
     }
 
-    let validation = await validate(data, rules)
+    let validation = await validate(party_slug, rules)
 
     while(validation.fails()) {
       party_slug = `${party_slug}-${Math.random()}`
       validation = ''
-      validation = await validate(data, rules)
+      validation = await validate(party_slug, rules)
     }
 
-    return response.status(200).send({slug: party_slug})
+    response
+    .status(200)
+    .send({party_slug: party_slug})
   }
 }
 

@@ -33,14 +33,13 @@ Route.group(() => {
 }).prefix('owner-guest')
 //end owner guest
 
-
 //start owner
 Route.group(() => {
   Route.get('/', 'PartyOwnerController.all')
+  Route.get('/party/:party_slug', 'PartyOwnerController.single')
 
   Route.post('/generate-slug', 'PartyOwnerController.generateSlug')
   Route.post('/party/add', 'PartyOwnerController.add')
-  Route.post('/party/{party_slug}', 'PartyOwnerController.single')
   Route.post('/edit/{party_slug}', 'PartyOwnerController.edit')
   Route.post('/delete/{party_slug}', 'PartyOwnerController.delete')
 }).prefix('owner').middleware(['auth'])
