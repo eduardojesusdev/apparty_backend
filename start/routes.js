@@ -40,14 +40,14 @@ Route.group(() => {
 
   Route.post('/generate-slug', 'PartyOwnerController.generateSlug')
   Route.post('/party/add', 'PartyOwnerController.add')
-  Route.post('/edit/{party_slug}', 'PartyOwnerController.edit')
-  Route.post('/delete/{party_slug}', 'PartyOwnerController.delete')
+  Route.post('/edit/:party_slug', 'PartyOwnerController.edit')
+  Route.post('/delete/:party_slug', 'PartyOwnerController.delete')
 }).prefix('owner').middleware(['auth'])
 
 Route.group(() => {
-  Route.get('/', 'OwnerController.show')
-  Route.post('/edit', 'OwnerController.edit')
-  Route.post('/delete', 'OwnerController.delete')
+  Route.get('/', 'OwnerController.get')
+  Route.post('/edit', 'OwnerController.update')
+  Route.delete('/delete', 'OwnerController.delete')
 }).prefix('owner/profile').middleware(['auth'])
 
 //end owner
