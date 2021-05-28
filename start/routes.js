@@ -42,12 +42,16 @@ Route.group(() => {
   Route.post('/party/add', 'PartyOwnerController.add')
   Route.post('/edit/:party_slug', 'PartyOwnerController.edit')
   Route.post('/delete/:party_slug', 'PartyOwnerController.delete')
+
+  Route.post('/upload-banner/:party_slug', 'FileController.upload')
 }).prefix('owner').middleware(['auth'])
 
 Route.group(() => {
   Route.get('/', 'OwnerController.get')
   Route.post('/edit', 'OwnerController.update')
   Route.delete('/delete', 'OwnerController.delete')
+
+  Route.post('/avatar', 'FileController.avatar')
 }).prefix('owner/profile').middleware(['auth'])
 
 //end owner
