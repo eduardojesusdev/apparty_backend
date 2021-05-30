@@ -1,11 +1,11 @@
 {
-  "name": "adonis-api-app",
+  "name": "apparty-api-owners",
   "version": "4.1.0",
   "adonis-version": "4.1.0",
-  "description": "Adonisjs boilerplate for API server with pre-configured JWT",
+  "description": "Api owner apparty",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "ENV_SILENT=true node server.js",
     "test": "node ace test"
   },
   "keywords": [

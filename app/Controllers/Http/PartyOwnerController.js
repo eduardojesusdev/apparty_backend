@@ -89,6 +89,10 @@ class PartyOwnerController {
       })
     }
 
+    if (!data.presences) {
+      data.presences = ['{}']
+    }
+
     try {
       const party = await new Party()
 
@@ -115,14 +119,12 @@ class PartyOwnerController {
       party.date_close = data.date_close
 
       if(await party.save()){
-        return response
+        response
         .status(200)
-        .send(
-          {
-            message: "Festa criada com sucesso!",
-            slug: party.party_slug
-          }
-        )
+        .send({
+          message: "Festa criada com sucesso!",
+          slug: party.party_slug
+        })
       }
     } catch (error) {
       response
@@ -210,7 +212,7 @@ class PartyOwnerController {
       party.date_close = data.date_close
 
       if(await party.save()){
-        return response
+        response
         .status(200)
         .send({
           message: "Festa atualizada com sucesso!",
@@ -230,8 +232,6 @@ class PartyOwnerController {
     const slug = request.params.party_slug
     try {
       const single = await Party.findByOrFail('party_slug', slug, 'owner_id', auth.user.id)
-      console.log(single)
-
       response
       .status(200)
       .send(single)
@@ -251,11 +251,11 @@ class PartyOwnerController {
       await party.delete()
 
       response
-        .status(200)
-        .send({
-          party: party,
-          message: 'Festa removida com sucesso!'
-        })
+      .status(200)
+      .send({
+        party: party,
+        message: 'Festa removida com sucesso!'
+      })
 
     } catch (error) {
       response
