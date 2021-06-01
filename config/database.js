@@ -11,6 +11,8 @@ const Url = use('url-parse')
 
 const db = new Url(Env.get('JAWSDB_URL'))
 
+console.log(db.pathname.substr(1))
+
 module.exports = {
 
   /*
@@ -27,8 +29,8 @@ module.exports = {
   mysql: {
     client: 'mysql',
     connection: {
-      host: Env.get('DB_HOST', db.host),
-      port: Env.get('DB_PORT', ''),
+      host: Env.get('DB_HOST', db.hostname),
+      port: Env.get('DB_PORT', db.port),
       user: Env.get('DB_USER', db.username),
       password: Env.get('DB_PASSWORD', db.password),
       database: Env.get('DB_DATABASE', db.pathname.substr(1))
