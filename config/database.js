@@ -9,7 +9,7 @@ const Helpers = use('Helpers')
 
 const Url = use('url-parse')
 
-const db = new Url(Env.get('CLEARDB_DATABASE_URL'))
+const db = new Url(Env.get('JAWS_DATABASE_URL'))
 
 module.exports = {
 
