@@ -11,7 +11,6 @@ const Url = use('url-parse')
 
 const db = new Url(Env.get('JAWSDB_URL'))
 
-console.log(db.pathname.substr(1))
 
 module.exports = {
 

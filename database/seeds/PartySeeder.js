@@ -18,7 +18,6 @@ const Database = use('Database')
 class PartySeeder {
   async run () {
     const party = await Factory.model('App/Models/Party').createMany(5)
-    console.log(party)
   }
 }
 
