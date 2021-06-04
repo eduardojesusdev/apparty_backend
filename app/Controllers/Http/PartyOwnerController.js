@@ -89,9 +89,7 @@ class PartyOwnerController {
       })
     }
 
-    if (!data.presences) {
-      data.presences = ['{}']
-    }
+    data.presences = '{"users":{}}'
 
     try {
       const party = await new Party()

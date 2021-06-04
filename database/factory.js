@@ -33,9 +33,11 @@ Factory.blueprint('App/Models/Party', async (faker) => {
     state: faker.unique(faker.state, 1),
     tel: faker.phone(),
     ticket_link: faker.url({domain: 'www.ingressocerto.com.br'}),
-    banner_link: faker.url({extensions: ['gif', 'jpg', 'png']}),
+    banner_link: '/uploads/banners/img.jpg',
     point_of_reference: faker.sentence({ words: 5 }),
-    presences: {},
+    presences: '{"users":{}}',
+    latitude: faker.latitude(),
+    longitude: faker.longitude(),
     theme: faker.gender({
       extraGenders: ['Festa do sinal', 'à fantasia', 'Anos 80', 'Brega']
     }),

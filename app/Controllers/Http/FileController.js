@@ -24,10 +24,9 @@ class FileController {
       if (party.banner_link) {
         newFileName = party.banner_link.split('/')
         newFileName = newFileName[newFileName.length - 1]
-        console.log(newFileName)
       }
 
-      await banner.move(Helpers.resourcesPath('/uploads/banners'), {
+      await banner.move(Helpers.publicPath('/uploads/banners'), {
         name: newFileName,
         overwrite: true
       })
@@ -36,7 +35,7 @@ class FileController {
         return banner.error()
       }
 
-      console.log(party)
+
       party.banner_link = `/uploads/banners/${banner.fileName}`
       if (party.save()) {
         response
