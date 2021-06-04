@@ -17,7 +17,7 @@ const Database = use('Database')
 
 class PartySeeder {
   async run () {
-    await Factory.model('App/Models/Party').createMany(5)
+    await Factory.model('App/Models/Party').createMany(30)
   }
 }
 
