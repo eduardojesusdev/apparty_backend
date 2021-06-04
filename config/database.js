@@ -28,11 +28,11 @@ module.exports = {
   mysql: {
     client: 'mysql',
     connection: {
-      host: Env.get('DB_HOST', Env.get('DB_HOST')),
-      port: Env.get('DB_PORT', Env.get('DB_PORT')),
-      user: Env.get('DB_USER', Env.get('DB_USER')),
-      password: Env.get('DB_PASSWORD', Env.get('DB_PASSWORD')),
-      database: Env.get('DB_DATABASE', Env.get('DB_DATABASE'))
+      host: Env.get('DB_HOST', db.hostname),
+      port: Env.get('DB_PORT', db.port),
+      user: Env.get('DB_USER', db.username),
+      password: Env.get('DB_PASSWORD', db.password),
+      database: Env.get('DB_DATABASE', db.pathname.substr(1))
     }
   }
 }
