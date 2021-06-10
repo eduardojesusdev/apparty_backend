@@ -27,9 +27,11 @@ Route.group(() => {
       application_name: Env.get('APP_NAME_OWNER')
     }
   })
+  Route.get('/media/:media_name', 'FileController.media')
   Route.post('/signup', 'SignUpController.ownerStore')
   Route.post('/login', 'LoginController.loginOwner')
   Route.post('/forgot-password', 'forgotController.forgotOwner')
+
 }).prefix('owner-guest')
 //end owner guest
 
