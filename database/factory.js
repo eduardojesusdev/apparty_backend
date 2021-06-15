@@ -22,7 +22,7 @@ Factory.blueprint('App/Models/Party', async (faker) => {
     party_slug: faker.sentence({ words: 1 }),
     owner_id: 1,
     type_event: faker.gender({
-      extraGenders: ['Hétero', 'LGBTQ+']
+      extraGenders: ['', 'LGBTQ+']
     }),
     tutorial_video_link: faker.url({domain: 'www.youtube.com'}),
     address: faker.address(),
@@ -33,7 +33,7 @@ Factory.blueprint('App/Models/Party', async (faker) => {
     state: faker.unique(faker.state, 1),
     tel: faker.phone(),
     ticket_link: faker.url({domain: 'www.ingressocerto.com.br'}),
-    banner_link: '/uploads/banners/img.jpg',
+    banner_link: '',
     point_of_reference: faker.sentence({ words: 5 }),
     presences: '[]',
     latitude: faker.latitude(),
