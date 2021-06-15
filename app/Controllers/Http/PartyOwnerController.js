@@ -89,7 +89,7 @@ class PartyOwnerController {
       })
     }
 
-    data.presences = '{"users":{}}'
+    data.presences = '[]'
 
     try {
       const party = await new Party()
