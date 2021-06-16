@@ -33,7 +33,7 @@ Factory.blueprint('App/Models/Party', async (faker) => {
     state: faker.unique(faker.state, 1),
     tel: faker.phone(),
     ticket_link: faker.url({domain: 'www.ingressocerto.com.br'}),
-    banner_link: '',
+    banner_link: 'https://res.cloudinary.com/apparty-driver/image/upload/v1623879174/maxresdefault_hkeqd1.jpg',
     point_of_reference: faker.sentence({ words: 5 }),
     presences: '[]',
     latitude: faker.latitude(),
@@ -41,7 +41,7 @@ Factory.blueprint('App/Models/Party', async (faker) => {
     theme: faker.gender({
       extraGenders: ['Festa do sinal', 'à fantasia', 'Anos 80', 'Brega']
     }),
-    atractions: "<h2>An Unordered HTML List</h2><ul><li>Coffee</li><li>Tea</li><li>Milk</li></ul>",
+    atractions: "1 - Artista mais famoso do Brasil\n2 - Artista menos famoso que o primeiro\n3 - Esse nem se fala",
     date_init: faker.date(),
     date_close: faker.date()
   }
