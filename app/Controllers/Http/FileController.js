@@ -4,7 +4,7 @@ const Helpers = use('Helpers')
 const fs = use('fs')
 const bytes = use('bytes')
 const Party = use('App/Models/Party')
-const User = use('App/models/User')
+const User = use('App/Models/User')
 const Cloudinary = use('App/Services/Cloudinary')
 
 
