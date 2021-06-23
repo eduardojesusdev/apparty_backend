@@ -51,8 +51,8 @@ class PartyOwnerController {
       ticket_link: "required",
       banner_link: "required",
       atractions: "required",
-      date_init: "required | date",
-      date_close: "required | date"
+      date_init: "required",
+      date_close: "required"
     }
 
     const messages = {
@@ -75,8 +75,7 @@ class PartyOwnerController {
       "ticket_link": "Ticket link é obrigatório",
       "banner_link": "Banner link é obrigatório",
       "date_init": "Data de inicio é obrigatório",
-      "date_init.date": "Data de inicio é inválida",
-      "date_close.date": "Data de encerramento é inválida",
+      "date_close": "Data de encerramento é obrigatório"
     }
 
     const validation = await validate(data, rules, messages)
@@ -117,6 +116,7 @@ class PartyOwnerController {
       party.date_close = data.date_close
 
       if(await party.save()){
+        console.log(party)
         response
         .status(200)
         .send({
@@ -150,8 +150,8 @@ class PartyOwnerController {
       ticket_link: "required",
       banner_link: "required",
       atractions: "required",
-      date_init: "required | date",
-      date_close: "required | date"
+      date_init: "required",
+      date_close: "required"
     }
 
     const messages = {
@@ -172,8 +172,7 @@ class PartyOwnerController {
       "ticket_link": "Ticket link é obrigatório",
       "banner_link": "Banner link é obrigatório",
       "date_init": "Data de inicio é obrigatório",
-      "date_init.date": "Data de inicio é inválida",
-      "date_close.date": "Data de encerramento é inválida",
+      "date_close": "Data de encerramento é obrigatório"
     }
 
     const validation = await validate(data, rules, messages)
@@ -230,6 +229,7 @@ class PartyOwnerController {
     const slug = request.params.party_slug
     try {
       const single = await Party.findByOrFail('party_slug', slug, 'owner_id', auth.user.id)
+      console.log(single)
       response
       .status(200)
       .send(single)
