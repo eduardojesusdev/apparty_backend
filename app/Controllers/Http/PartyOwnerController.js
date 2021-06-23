@@ -45,6 +45,8 @@ class PartyOwnerController {
       zipcode: "required",
       number: "required",
       district: "required",
+      latitude: "required",
+      longitude: "required",
       city: "required",
       state: "required | max:2",
       tel: "required",
@@ -67,6 +69,8 @@ class PartyOwnerController {
       "zipcode": "CEP é obrigatório",
       "number": "Número é obrigatório",
       "district": "Bairro é obrigatório",
+      "latitude": "Latitude é obrigatório",
+      "longitude": "Longitude é obrigatório",
       "city": "Cidade é obrigatório",
       "state": "UF é obrigatório",
       "state.max": "UF deve ter no máximo 2 caractéres",
@@ -108,6 +112,8 @@ class PartyOwnerController {
       party.ticket_link = data.ticket_link
       party.banner_link = data.banner_link
       party.atractions = data.atractions
+      party.latitude = data.latitude
+      party.longitude = data.longitude
       party.tutorial_video_link = data.tutorial_video_link
       party.point_of_reference = data.point_of_reference
       party.presences = data.presences
@@ -147,6 +153,8 @@ class PartyOwnerController {
       city: "required",
       state: "required | max:2",
       tel: "required",
+      latitude: "required",
+      longitude: "required",
       ticket_link: "required",
       banner_link: "required",
       atractions: "required",
@@ -166,6 +174,8 @@ class PartyOwnerController {
       "district": "Bairro é obrigatório",
       "city": "Cidade é obrigatório",
       "state": "UF é obrigatório",
+      "latitude": "Latitude é obrigatório",
+      "longitude": "Longitude é obrigatório",
       "state.max": "UF deve ter no máximo 2 caractéres",
       "point_of_reference": "Ponto de referência é obrigatório",
       "tel": "Telefone é obrigatório",
@@ -204,6 +214,8 @@ class PartyOwnerController {
       party.tutorial_video_link = data.tutorial_video_link
       party.point_of_reference = data.point_of_reference
       party.presences = data.presences
+      party.latitude = data.latitude
+      party.longitude = data.longitude
       party.theme = data.theme
       party.date_init = data.date_init
       party.date_close = data.date_close
